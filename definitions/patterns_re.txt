@@ -70,6 +70,9 @@ chr\s*\(\s*['"]?\s*((95)|(0[Xx]5[Ff]))\s*['"]?\s*\)
 # Long single line of PHP.
 ^.*<\?php.{1100,}\?>.*$
 
+# FilesMan Backdoor
+["']F['"\s.]*+i['"\s.]*+l['"\s.]*+e['"\s.]*+s['"\s.]*+M['"\s.]*+a['"\s.]*+n['"]
+
 # Obuscated require
 require[^;]*?\\[Xx][0-9A-Fa-f]
 
