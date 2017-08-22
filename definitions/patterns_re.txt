@@ -31,7 +31,7 @@ eval\([a-z0-9_]+\(base64_decode\(
 #
 Googlebot['"]{0,1}\s*\)\){echo\s+file_get_contents
 
-#execute base64 code
+# execute base64 code
 eVaL\(\s*trim\(\s*baSe64_deCoDe\(
 
 #
@@ -59,8 +59,11 @@ chr\s*\(\s*['"]?\s*((95)|(0[Xx]5[Ff]))\s*['"]?\s*\)
 
 #Detects generic base64 strings longer than 260 characters enclosed in quotes ending with 0-3 '=' chars.
 #260 was a threshold chosen because strings of 256 characters are common enough.  Might increase later to reduce false positives.
-#Long base64 quoted string.
+# Long base64 quoted string.
 ['"][A-Za-z0-9+\/]{260,}={0,3}['"]
+
+# 4 base64 strings cat'd together
+(?>(?>['"])[A-Za-z0-9+\/]{10,}+(?>['"])\s*+\.\s*+){3}
 
 #Detects long single lines contained within PHP tags.
 #We can increase from 1100 later if we need to.
