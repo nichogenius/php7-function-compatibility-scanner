@@ -64,5 +64,11 @@ chr\s*\(\s*['"]?\s*((95)|(0[Xx]5[Ff]))\s*['"]?\s*\)
 
 #Detects long single lines contained within PHP tags.
 #We can increase from 1100 later if we need to.
-#Long single line of PHP.
+# Long single line of PHP.
 ^.*<\?php.{1100,}\?>.*$
+
+# Obuscated require
+require[^;]*?\\[Xx][0-9A-Fa-f]
+
+# Obfuscated include
+include[^;]*?\\[Xx][0-9A-Fa-f]
