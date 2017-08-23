@@ -322,7 +322,7 @@ class MalwareScanner
         //Append Path
         //'#' and {} included to prevent accidental script execution attempts
         // in the event that script output is pasted into a root terminal
-        $opath = '# ' . "{\." . $path . "\.}";
+        $opath = '# ' . "{\'" . $path . "\'}";
         $output_string = $output_string . $opath . ' ';
 
         //'#' added again as code snippets have the potential to be valid shell commands
