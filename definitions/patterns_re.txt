@@ -51,19 +51,19 @@ chr\s*\(\s*101\s*\)\s*\.\s*chr\s*\(\s*118\s*\)\s*\.\s*chr\s*\(\s*97\s*\)\s*\.\s*
 
 #Detects the '_' character encoded in a string like "\x5F".  '_' is present in many functions that malware would want to hide.
 # '_' as "\x5f"
-\\[Xx]5[Ff]
+\\x5f
 
 #Detects the '_' character placed inside a call to the 'chr()' function
 # '_' as 'chr(95)' or 'chr(0x5f)'
-chr\s*\(\s*['"]?\s*((95)|(0[Xx]5[Ff]))\s*['"]?\s*\)
+chr\s*\(\s*['"]?\s*((95)|(0x5f))\s*['"]?\s*\)
 
 #Detects generic base64 strings longer than 260 characters enclosed in quotes ending with 0-3 '=' chars.
 #260 was a threshold chosen because strings of 256 characters are common enough.  Might increase later to reduce false positives.
 # Long base64 quoted string.
-['"][A-Za-z0-9+\/]{260,}={0,3}['"]
+['"][a-z0-9+\/]{260,}={0,3}['"]
 
-# 4 base64 strings cat'd together
-(?>(?>['"])[A-Za-z0-9+\/]{10,}+(?>['"])\s*+\.\s*+){3}
+# base64 strings cat'd together
+(?>(?>['"])[a-z0-9+\/]{20,}+(?>['"])\s*+\.\s*+){7}
 
 #Detects long single lines contained within PHP tags.
 #We can increase from 1100 later if we need to.
@@ -71,10 +71,10 @@ chr\s*\(\s*['"]?\s*((95)|(0[Xx]5[Ff]))\s*['"]?\s*\)
 ^.*<\?php.{1100,}\?>.*$
 
 # FilesMan Backdoor
-["']F['"\s.]*+i['"\s.]*+l['"\s.]*+e['"\s.]*+s['"\s.]*+M['"\s.]*+a['"\s.]*+n['"]
+["']f['"\s.]*+i['"\s.]*+l['"\s.]*+e['"\s.]*+s['"\s.]*+m['"\s.]*+a['"\s.]*+n['"]
 
 # Obuscated require
-require[^;]*?\\[Xx][0-9A-Fa-f]
+require[^;]*?\\x[0-9a-f]{2}
 
 # Obfuscated include
-include[^;]*?\\[Xx][0-9A-Fa-f]
+include[^;]*?\\x[0-9a-f]{2}
