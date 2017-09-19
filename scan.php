@@ -309,7 +309,9 @@ class MalwareScanner
 
         //Include cTime
         if ($this->flagTime) {
-            $changed_time = filectime($path);
+	    $c_time = filectime($path);
+            $m_time = filemtime($path);
+            $changed_time = ($c_time > $m_time ? $c_time : $m_time);
             $htime = date('H:i d-m-Y', $changed_time);
             $output_string = $output_string . $this->ANSI_BLUE   . $htime . $this->ANSI_OFF . ' ';
         }
